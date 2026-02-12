@@ -48,6 +48,19 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 | `npm run lint` | Linter ESLint                      |
 | `npm test`     | Pruebas unitarias (Vitest)         |
 
+## Despliegue en Vercel
+
+1. En Vercel, crea un nuevo proyecto importando este repositorio (`Frontend-PrevalentWare-Prueba`).
+2. En **Settings → Environment Variables**, añade:
+   - `NEXT_PUBLIC_API_URL` con la URL pública del backend.  
+     Ejemplo: `https://backend-prevalentware-prueba.vercel.app`
+3. Deja la configuración por defecto de framework:
+   - Framework: **Next.js**
+   - Comando de build: `npm run build`
+   - Comando de start: `npm start`
+4. Haz clic en **Deploy**.  
+   Al finalizar, Vercel mostrará la URL pública del frontend.
+
 ## Estructura
 
 ```
