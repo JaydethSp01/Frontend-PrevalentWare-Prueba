@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { useRole } from "@/hooks/useRole";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ export function Navbar({ onOpenMobileMenu }: NavbarProps) {
 
   const handleSignOut = () => {
     signOut();
+    toast.success("Has cerrado sesión correctamente");
     window.location.href = "/login";
   };
 
