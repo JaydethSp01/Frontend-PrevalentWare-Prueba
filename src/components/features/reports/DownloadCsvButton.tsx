@@ -18,7 +18,7 @@ export function DownloadCsvButton({
     const rows = movements.map((m) => [
       `"${m.concept.replace(/"/g, '""')}"`,
       m.amount.toFixed(2),
-      m.type,
+      m.type === "INCOME" ? "INGRESO" : "EGRESO",
       m.date,
       m.userName ?? m.userId,
     ]);
