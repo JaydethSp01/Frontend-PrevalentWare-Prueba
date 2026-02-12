@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * PrevalentWare digital solutions - Portafolio de colores UX/UI
+ * Fondo navy oscuro, texto blanco, acento cyan/azul brillante.
+ * Alto contraste para usabilidad y accesibilidad.
+ */
+@layer base {
+  :root {
+    /* Fondo principal (navy #0D0E23) */
+    --background: 236 46% 9%;
+    --foreground: 0 0% 100%;
+    /* Superficies (cards, sidebar) - ligeramente más claro */
+    --card: 234 40% 12%;
+    --card-foreground: 0 0% 100%;
+    --popover: 234 40% 12%;
+    --popover-foreground: 0 0% 100%;
+    /* CTA y acento PrevalentWare (cyan #00B0F0) */
+    --primary: 199 100% 47%;
+    --primary-foreground: 0 0% 100%;
+    /* Secundario - superficie hover */
+    --secondary: 234 35% 16%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 234 30% 18%;
+    --muted-foreground: 220 15% 70%;
+    --accent: 199 100% 47%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 234 30% 22%;
+    --input: 234 30% 22%;
+    --ring: 199 100% 47%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 236 46% 7%;
+    --foreground: 0 0% 100%;
+    --card: 234 40% 10%;
+    --card-foreground: 0 0% 100%;
+    --popover: 234 40% 10%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 199 100% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 234 35% 14%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 234 30% 16%;
+    --muted-foreground: 220 15% 65%;
+    --accent: 199 100% 47%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 234 30% 20%;
+    --input: 234 30% 20%;
+    --ring: 199 100% 47%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  /* Focus visible para accesibilidad (teclado y lectores de pantalla) */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
