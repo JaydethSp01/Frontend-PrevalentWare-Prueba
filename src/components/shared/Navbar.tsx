@@ -17,7 +17,7 @@ export function Navbar({ onOpenMobileMenu }: NavbarProps) {
 
   const handleSignOut = () => {
     signOut();
-    toast.success("Has cerrado sesión correctamente");
+    toast.success("Has cerrado sesión correctamente", { duration: 4000 });
     window.location.href = "/login";
   };
 

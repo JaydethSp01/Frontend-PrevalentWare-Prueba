@@ -115,7 +115,7 @@ function HomePage() {
   const formatCurrency = (value: number) =>
     new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "EUR",
+      currency: "COP",
       maximumFractionDigits: 2,
     }).format(value);
 

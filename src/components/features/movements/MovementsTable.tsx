@@ -31,7 +31,7 @@ function formatDate(dateStr: string) {
 function formatAmount(amount: number) {
   return new Intl.NumberFormat("es-ES", {
     style: "currency",
-    currency: "EUR",
+    currency: "COP",
   }).format(amount);
 }
 
@@ -58,9 +58,12 @@ export function MovementsTable({ movements, onEdit, onDelete }: MovementsTablePr
         {movements.map((m) => (
           <TableRow key={m.id}>
             <TableCell className="font-medium">{m.concept}</TableCell>
-            <TableCell>{formatAmount(m.amount)}</TableCell>
+            <TableCell className="uppercase">{formatAmount(m.amount)}</TableCell>
             <TableCell>
-              <Badge variant={m.type === "INCOME" ? "success" : "warning"}>
+              <Badge
+                variant={m.type === "INCOME" ? "success" : "warning"}
+                className="uppercase"
+              >
                 {m.type === "INCOME" ? "Ingreso" : "Egreso"}
               </Badge>
             </TableCell>

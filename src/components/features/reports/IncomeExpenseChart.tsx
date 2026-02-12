@@ -50,7 +50,7 @@ export function IncomeExpenseChart({ movements }: IncomeExpenseChartProps) {
             formatter={(value: number) =>
               new Intl.NumberFormat("es-ES", {
                 style: "currency",
-                currency: "EUR",
+                currency: "COP",
               }).format(value)
             }
           />

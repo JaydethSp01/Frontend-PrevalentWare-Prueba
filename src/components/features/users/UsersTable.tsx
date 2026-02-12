@@ -47,7 +47,10 @@ export function UsersTable({ users, onEdit, onDelete }: UsersTableProps) {
               {u.phone ?? "—"}
             </TableCell>
             <TableCell>
-              <Badge variant={u.role === "ADMIN" ? "default" : "secondary"}>
+              <Badge
+                variant={u.role === "ADMIN" ? "default" : "secondary"}
+                className="uppercase"
+              >
                 {u.role}
               </Badge>
             </TableCell>

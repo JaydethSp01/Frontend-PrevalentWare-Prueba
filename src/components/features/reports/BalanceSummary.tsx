@@ -32,11 +32,22 @@ export function BalanceSummary({ movements }: BalanceSummaryProps) {
           >
             {new Intl.NumberFormat("es-ES", {
               style: "currency",
-              currency: "EUR",
+              currency: "COP",
             }).format(balance)}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Ingresos: +{income.toFixed(2)} € · Egresos: −{expense.toFixed(2)} €
+            Ingresos: +
+            {new Intl.NumberFormat("es-ES", {
+              style: "currency",
+              currency: "COP",
+              maximumFractionDigits: 2,
+            }).format(income)}{" "}
+            · Egresos: −
+            {new Intl.NumberFormat("es-ES", {
+              style: "currency",
+              currency: "COP",
+              maximumFractionDigits: 2,
+            }).format(expense)}
           </p>
         </CardContent>
       </Card>
