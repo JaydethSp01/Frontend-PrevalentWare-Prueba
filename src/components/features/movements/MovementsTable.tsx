@@ -58,13 +58,12 @@ export function MovementsTable({ movements, onEdit, onDelete }: MovementsTablePr
       </TableHeader>
       <TableBody>
         {movements.map((m) => (
-          <TableRow key={m.id}>
+          <TableRow key={m.id} className="uppercase">
             <TableCell className="font-medium">{m.concept}</TableCell>
-            <TableCell className="uppercase">{formatAmount(m.amount)}</TableCell>
+            <TableCell>{formatAmount(m.amount)}</TableCell>
             <TableCell>
               <Badge
                 variant={m.type === "INCOME" ? "success" : "warning"}
-                className="uppercase"
               >
                 {m.type === "INCOME" ? "INGRESO" : "EGRESO"}
               </Badge>

@@ -40,7 +40,7 @@ export function UsersTable({ users, onEdit, onDelete }: UsersTableProps) {
       </TableHeader>
       <TableBody>
         {users.map((u) => (
-          <TableRow key={u.id}>
+          <TableRow key={u.id} className="uppercase">
             <TableCell className="font-medium">{u.name}</TableCell>
             <TableCell>{u.email}</TableCell>
             <TableCell className="text-muted-foreground">
@@ -49,7 +49,6 @@ export function UsersTable({ users, onEdit, onDelete }: UsersTableProps) {
             <TableCell>
               <Badge
                 variant={u.role === "ADMIN" ? "default" : "secondary"}
-                className="uppercase"
               >
                 {u.role}
               </Badge>

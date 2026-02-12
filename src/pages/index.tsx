@@ -263,12 +263,10 @@ function HomePage() {
                 </TableHeader>
                 <TableBody>
                   {recent.map((m) => (
-                    <TableRow key={m.id}>
+                    <TableRow key={m.id} className="uppercase">
                       <TableCell className="font-medium">{m.concept}</TableCell>
-                      <TableCell className="uppercase">
-                        {formatCurrency(m.amount)}
-                      </TableCell>
-                      <TableCell className="text-xs font-medium uppercase">
+                      <TableCell>{formatCurrency(m.amount)}</TableCell>
+                      <TableCell className="text-xs font-medium">
                         {m.type === "INCOME" ? "INGRESO" : "EGRESO"}
                       </TableCell>
                       <TableCell className="text-muted-foreground">
