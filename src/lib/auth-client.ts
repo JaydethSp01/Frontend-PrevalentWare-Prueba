@@ -1,9 +1,12 @@
 import { createAuthClient } from "better-auth/react";
 
-const backendUrl = process.env.NEXT_PUBLIC_API_URL;
+// Normalizamos la URL para quedarnos solo con el origen (sin /api/auth)
+const backendUrl =
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/auth\/?$/, "") ??
+  "http://localhost:8000";
 
 export const authClient = createAuthClient({
-  baseURL: backendUrl || "http://localhost:8000",
+  baseURL: backendUrl,
 });
 
 export const signInWithGitHub = () =>
