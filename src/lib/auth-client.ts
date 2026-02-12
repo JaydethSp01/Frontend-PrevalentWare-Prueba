@@ -12,6 +12,8 @@ export const authClient = createAuthClient({
 export const signInWithGitHub = () =>
   authClient.signIn.social({
     provider: "github",
+    redirectTo:
+      typeof window !== "undefined" ? window.location.origin : undefined,
   });
 
 export const signOut = () => {
