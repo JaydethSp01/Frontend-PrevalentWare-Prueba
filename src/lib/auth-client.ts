@@ -7,6 +7,11 @@ const backendUrl =
 
 export const authClient = createAuthClient({
   baseURL: backendUrl,
+  // Aseguramos que las cookies de sesión del backend se envíen
+  // en las peticiones cross-origin (frontend -> backend).
+  fetchOptions: {
+    credentials: "include",
+  },
 });
 
 export const signInWithGitHub = () =>
