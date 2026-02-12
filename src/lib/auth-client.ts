@@ -12,7 +12,8 @@ export const authClient = createAuthClient({
 export const signInWithGitHub = () =>
   authClient.signIn.social({
     provider: "github",
-    redirectTo:
+    // URL absoluta del frontend a donde debe volver después del login
+    callbackURL:
       typeof window !== "undefined" ? window.location.origin : undefined,
   });
 
