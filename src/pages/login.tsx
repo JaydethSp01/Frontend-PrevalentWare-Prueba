@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -12,7 +13,8 @@ import logoPrevalentWare from "@/assets/logo-prevalentware.png";
 export default function LoginPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const { isAuthenticated, isPending } = useAuth();
+  const [hasWelcomed, setHasWelcomed] = useState(false);
+  const { isAuthenticated, isPending, user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
@@ -20,10 +22,14 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (!mounted) return;
-    if (!isPending && isAuthenticated) {
-      router.replace("/");
-    }
-  }, [mounted, isPending, isAuthenticated, router]);
+    if (isPending || !isAuthenticated) return;
+    if (hasWelcomed) return;
+
+    const name = user?.name || user?.email || "usuario";
+    toast.success(`Has iniciado sesión como ${name}`);
+    setHasWelcomed(true);
+    router.replace("/");
+  }, [mounted, isPending, isAuthenticated, user, hasWelcomed, router]);
 
   if (!mounted) {
     return (
