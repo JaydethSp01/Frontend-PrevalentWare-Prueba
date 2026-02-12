@@ -23,10 +23,8 @@ export default function LoginPage() {
     if (!mounted) return;
     if (isPending || !isAuthenticated) return;
 
-    const name = user?.name || user?.email || "usuario";
-    toast.success(`Has iniciado sesión como ${name}`);
-    router.replace("/?logged=1");
-  }, [mounted, isPending, isAuthenticated, user, router]);
+    router.replace("/");
+  }, [mounted, isPending, isAuthenticated, router]);
 
   if (!mounted) {
     return (
@@ -50,7 +48,10 @@ export default function LoginPage() {
 
   if (!isPending && isAuthenticated) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background" role="status">
+      <div
+        className="flex min-h-screen items-center justify-center bg-background"
+        role="status"
+      >
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
       </div>
     );
@@ -78,11 +79,15 @@ export default function LoginPage() {
                 priority
               />
             </div>
-            <h1 id="login-title" className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            <h1
+              id="login-title"
+              className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+            >
               Gestión Financiera
             </h1>
             <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-              Inicia sesión para acceder al dashboard y gestionar tus movimientos.
+              Inicia sesión para acceder al dashboard y gestionar tus
+              movimientos.
             </p>
           </header>
           <div className="space-y-4 px-8 pb-10">

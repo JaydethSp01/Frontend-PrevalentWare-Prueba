@@ -14,13 +14,16 @@ export const authClient = createAuthClient({
   },
 });
 
-export const signInWithGitHub = () =>
-  authClient.signIn.social({
+export const signInWithGitHub = () => {
+  if (typeof window !== "undefined") {
+    window.sessionStorage.setItem("justLoggedIn", "1");
+  }
+  return authClient.signIn.social({
     provider: "github",
-    // URL absoluta del frontend a donde debe volver después del login
     callbackURL:
       typeof window !== "undefined" ? window.location.origin : undefined,
   });
+};
 
 export const signOut = () => {
   authClient.signOut();
