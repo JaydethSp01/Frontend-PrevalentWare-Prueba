@@ -34,20 +34,9 @@ El frontend cumple el requisito **"NextJS API routes para comunicación con el b
 
 Crea `.env.local` en la raíz del frontend:
 
-**Desarrollo (cliente llama al backend directamente):**
-
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
-
-**Producción con BFF (cliente llama al frontend; el proxy usa BACKEND_URL):**
-
-```env
-# No definir NEXT_PUBLIC_API_URL
-BACKEND_URL=https://tu-backend.vercel.app
-```
-
-En ambos casos, el auth (Better Auth) sigue usando la URL del backend para login/logout (configurada en `auth-client`).
 
 ## Scripts
 
@@ -90,9 +79,3 @@ Los formularios de administración (edición de usuario, nuevo/editar movimiento
 - **React Hook Form** con `zodResolver`.
 - **Alertas:** mensajes bajo cada campo y toasts (Sonner) en caso de error de validación o fallo de guardado.
 
-## Despliegue (Vercel)
-
-1. Conectar el repositorio del frontend a Vercel.
-2. Configurar `NEXT_PUBLIC_API_URL` con la URL del backend.
-3. Build: `npm run build` (Next.js por defecto).
-4. Asegurar que el backend tenga `FRONTEND_URL` apuntando a esta app en producción.
