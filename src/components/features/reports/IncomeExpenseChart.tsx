@@ -17,6 +17,42 @@ interface IncomeExpenseChartProps {
   movements: Movement[];
 }
 
+const tooltipFormatter = (value: number) =>
+  new Intl.NumberFormat("es-ES", {
+    style: "currency",
+    currency: "COP",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(value);
+
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: {
+  active?: boolean;
+  payload?: { name: string; value: number; color: string }[];
+  label?: string;
+}) => {
+  if (!active || !payload || payload.length === 0) return null;
+
+  return (
+    <div className="rounded-lg border border-border bg-background/95 px-3 py-2 text-xs shadow-lg backdrop-blur">
+      <p className="mb-1 font-semibold text-foreground">{label}</p>
+      {payload.map((entry) => (
+        <p key={entry.name} className="flex items-center justify-between gap-2">
+          <span className="font-medium" style={{ color: entry.color }}>
+            {entry.name}:
+          </span>
+          <span className="text-foreground">
+            {tooltipFormatter(entry.value ?? 0)}
+          </span>
+        </p>
+      ))}
+    </div>
+  );
+};
+
 export function IncomeExpenseChart({ movements }: IncomeExpenseChartProps) {
   const data = useMemo(() => {
     const byMonth: Record<
@@ -46,16 +82,7 @@ export function IncomeExpenseChart({ movements }: IncomeExpenseChartProps) {
           <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
           <XAxis dataKey="month" className="text-xs" />
           <YAxis className="text-xs" />
-          <Tooltip
-            formatter={(value: number) =>
-              new Intl.NumberFormat("es-ES", {
-                style: "currency",
-                currency: "COP",
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-              }).format(value)
-            }
-          />
+          <Tooltip content={<CustomTooltip />} />
           <Legend />
           <Bar
             dataKey="ingresos"
