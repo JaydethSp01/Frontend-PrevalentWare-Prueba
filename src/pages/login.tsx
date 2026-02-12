@@ -13,7 +13,6 @@ import logoPrevalentWare from "@/assets/logo-prevalentware.png";
 export default function LoginPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const [hasWelcomed, setHasWelcomed] = useState(false);
   const { isAuthenticated, isPending, user } = useAuth();
 
   useEffect(() => {
@@ -23,13 +22,11 @@ export default function LoginPage() {
   useEffect(() => {
     if (!mounted) return;
     if (isPending || !isAuthenticated) return;
-    if (hasWelcomed) return;
 
     const name = user?.name || user?.email || "usuario";
     toast.success(`Has iniciado sesión como ${name}`);
-    setHasWelcomed(true);
-    router.replace("/");
-  }, [mounted, isPending, isAuthenticated, user, hasWelcomed, router]);
+    router.replace("/?logged=1");
+  }, [mounted, isPending, isAuthenticated, user, router]);
 
   if (!mounted) {
     return (

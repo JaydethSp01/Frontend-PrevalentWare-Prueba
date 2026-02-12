@@ -1,5 +1,7 @@
 "use client";
-
+ 
+import { toast } from "sonner";
+import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
@@ -27,12 +29,32 @@ const quickLinks = [
 ];
 
 function HomePage() {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [welcomedFromLogin, setWelcomedFromLogin] = useState(false);
   const { canAccessUsers, canAccessReports, isUser } = useRole();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    if (welcomedFromLogin) return;
+    if (router.query.logged !== "1") return;
+
+    // Mostramos un toast suave al llegar desde el login
+    toast.success("Has iniciado sesión correctamente");
+    setWelcomedFromLogin(true);
+
+    // Limpiamos el query param de la URL
+    const { logged, ...rest } = router.query;
+    router.replace(
+      { pathname: router.pathname, query: rest },
+      undefined,
+      { shallow: true },
+    );
+  }, [mounted, router, welcomedFromLogin]);
 
   const {
     data: movements = [],
