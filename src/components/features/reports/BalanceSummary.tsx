@@ -33,6 +33,8 @@ export function BalanceSummary({ movements }: BalanceSummaryProps) {
             {new Intl.NumberFormat("es-ES", {
               style: "currency",
               currency: "COP",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
             }).format(balance)}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
@@ -40,13 +42,15 @@ export function BalanceSummary({ movements }: BalanceSummaryProps) {
             {new Intl.NumberFormat("es-ES", {
               style: "currency",
               currency: "COP",
-              maximumFractionDigits: 2,
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
             }).format(income)}{" "}
             · Egresos: −
             {new Intl.NumberFormat("es-ES", {
               style: "currency",
               currency: "COP",
-              maximumFractionDigits: 2,
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
             }).format(expense)}
           </p>
         </CardContent>

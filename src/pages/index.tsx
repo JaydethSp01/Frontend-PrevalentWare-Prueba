@@ -116,7 +116,8 @@ function HomePage() {
     new Intl.NumberFormat("es-ES", {
       style: "currency",
       currency: "COP",
-      maximumFractionDigits: 2,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(value);
 
   const formatDate = (dateStr: string) =>
@@ -268,7 +269,7 @@ function HomePage() {
                         {formatCurrency(m.amount)}
                       </TableCell>
                       <TableCell className="text-xs font-medium uppercase">
-                        {m.type === "INCOME" ? "Ingreso" : "Egreso"}
+                        {m.type === "INCOME" ? "INGRESO" : "EGRESO"}
                       </TableCell>
                       <TableCell className="text-muted-foreground">
                         {formatDate(m.date)}

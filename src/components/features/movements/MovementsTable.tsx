@@ -32,6 +32,8 @@ function formatAmount(amount: number) {
   return new Intl.NumberFormat("es-ES", {
     style: "currency",
     currency: "COP",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(amount);
 }
 
@@ -64,7 +66,7 @@ export function MovementsTable({ movements, onEdit, onDelete }: MovementsTablePr
                 variant={m.type === "INCOME" ? "success" : "warning"}
                 className="uppercase"
               >
-                {m.type === "INCOME" ? "Ingreso" : "Egreso"}
+                {m.type === "INCOME" ? "INGRESO" : "EGRESO"}
               </Badge>
             </TableCell>
             <TableCell className="text-muted-foreground">

@@ -51,6 +51,8 @@ export function IncomeExpenseChart({ movements }: IncomeExpenseChartProps) {
               new Intl.NumberFormat("es-ES", {
                 style: "currency",
                 currency: "COP",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
               }).format(value)
             }
           />
