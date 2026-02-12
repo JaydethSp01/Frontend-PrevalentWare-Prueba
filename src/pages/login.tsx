@@ -8,9 +8,6 @@ import { useAuth } from "@/hooks/useAuth";
 
 import logoPrevalentWare from "@/assets/logo-prevalentware.png";
 
-/**
- * Login con Better Auth (GitHub). Sin mock.
- */
 export default function LoginPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);

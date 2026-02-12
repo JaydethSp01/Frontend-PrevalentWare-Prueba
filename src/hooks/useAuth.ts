@@ -2,9 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 
-/**
- * Session from Better Auth (backend). No mock.
- */
+
 export function useAuth() {
   const { data: session, isPending: authPending, error } = authClient.useSession();
   const user = session?.user;
