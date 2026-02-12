@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -65,12 +66,13 @@ export default function LoginPage() {
         >
           <header className="flex flex-col items-center pt-10 pb-6 text-center">
             <div className="mb-6 flex justify-center">
-              <img
-                src={logoPrevalentWare.src}
+              <Image
+                src={logoPrevalentWare}
                 alt="PrevalentWare digital solutions"
                 width={200}
                 height={64}
                 className="h-16 w-[200px] object-contain object-center"
+                priority
               />
             </div>
             <h1 id="login-title" className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import {
   LayoutDashboard,
@@ -32,12 +33,13 @@ export function Sidebar() {
     >
       <div className="flex h-20 items-center gap-3 border-b border-border bg-gradient-to-r from-background via-card/95 to-card px-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 shadow-soft-lg">
-          <img
-            src={logoPrevalentWare.src}
+          <Image
+            src={logoPrevalentWare}
             alt="PrevalentWare digital solutions"
             width={96}
             height={32}
             className="h-8 w-24 shrink-0 object-contain drop-shadow-[0_0_8px_rgba(0,0,0,0.7)]"
+            priority
           />
         </div>
         <span className="truncate text-sm font-semibold tracking-tight text-foreground">
