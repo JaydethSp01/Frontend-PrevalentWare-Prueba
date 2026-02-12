@@ -12,7 +12,8 @@ export const authClient = createAuthClient({
 export const signInWithGitHub = () =>
   authClient.signIn.social({
     provider: "github",
-    callbackURL: typeof window !== "undefined" ? `${window.location.origin}/` : "/",
+    callbackURL:
+      typeof window !== "undefined" ? `${window.location.origin}` : "/",
   });
 
 export const signOut = () => {
