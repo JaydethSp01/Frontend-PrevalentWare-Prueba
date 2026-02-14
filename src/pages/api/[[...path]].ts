@@ -1,10 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-/**
- * BFF: Next.js API routes para comunicación con el backend.
- * Hace proxy de las peticiones al backend (movements, users, reports)
- * reenviando método, headers (incl. cookie), body y query.
- */
 function getBackendUrl(): string {
   return (
     process.env.BACKEND_URL ||
@@ -13,9 +8,14 @@ function getBackendUrl(): string {
   );
 }
 
+/** Quita el atributo Domain de un valor Set-Cookie para que aplique al host actual (frontend). */
+function rewriteSetCookieForFrontend(cookieValue: string): string {
+  return cookieValue.replace(/;\s*Domain=[^;]+/gi, "").trim();
+}
+
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const path = req.query.path;
   const pathArray = Array.isArray(path) ? path : path ? [path] : [];
@@ -51,12 +51,34 @@ export default async function handler(
     body = typeof req.body === "string" ? req.body : JSON.stringify(req.body);
   }
 
+  const isAuth = pathArray[0] === "auth";
+
   try {
     const backendRes = await fetch(url.toString(), {
       method: req.method ?? "GET",
       headers,
       body,
+      redirect: isAuth ? "manual" : "follow",
     });
+
+    if (isAuth) {
+      res.status(backendRes.status);
+      const setCookies = (
+        typeof backendRes.headers.getSetCookie === "function"
+          ? backendRes.headers.getSetCookie()
+          : []
+      ) as string[];
+      for (const cookie of setCookies) {
+        res.append("Set-Cookie", rewriteSetCookieForFrontend(cookie));
+      }
+      const location = backendRes.headers.get("Location");
+      if (location) res.setHeader("Location", location);
+      const contentType = backendRes.headers.get("content-type");
+      if (contentType) res.setHeader("Content-Type", contentType);
+      const text = await backendRes.text();
+      res.end(text);
+      return;
+    }
 
     const contentType = backendRes.headers.get("content-type");
     if (contentType?.includes("application/json")) {
@@ -64,7 +86,9 @@ export default async function handler(
       res.status(backendRes.status).json(data);
     } else {
       const text = await backendRes.text();
-      res.status(backendRes.status).setHeader("Content-Type", contentType ?? "text/plain");
+      res
+        .status(backendRes.status)
+        .setHeader("Content-Type", contentType ?? "text/plain");
       res.end(text);
     }
   } catch (err) {
