@@ -1,15 +1,9 @@
 import type { Movement, MovementCreateInput } from "@/core/domain";
 
-/** BFF: si no hay URL pública del backend, usamos las Next.js API routes del frontend (proxy). */
-const API_BASE =
-  typeof window !== "undefined" && process.env.NEXT_PUBLIC_API_URL
-    ? process.env.NEXT_PUBLIC_API_URL
-    : "";
-
+/** Siempre usamos el mismo origen en el navegador para que la cookie de sesión se envíe (BFF hace proxy al backend). */
 function getBase(): string {
-  if (API_BASE) return API_BASE;
   if (typeof window !== "undefined") return window.location.origin;
-  return "http://localhost:8000";
+  return process.env.BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 }
 
 const defaultFetchOptions: RequestInit = {

@@ -45,6 +45,13 @@ export default async function handler(
   if (req.headers.authorization) {
     headers["Authorization"] = req.headers.authorization;
   }
+  // Better Auth exige Origin/Referer válidos en POST (p. ej. sign-out); si no, devuelve 403.
+  if (req.headers.origin) {
+    headers["Origin"] = req.headers.origin;
+  }
+  if (req.headers.referer) {
+    headers["Referer"] = req.headers.referer;
+  }
 
   let body: string | undefined;
   if (req.method !== "GET" && req.method !== "HEAD" && req.body !== undefined) {
