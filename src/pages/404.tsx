@@ -1,30 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { Layout } from "@/components/shared/Layout";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Página 404 independiente: sin layout del dashboard (seguridad).
+ * Quienes lleguen por una URL inexistente no ven la estructura interna de la app.
+ */
 export default function NotFoundPage() {
   return (
-    <Layout>
-      <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-6 text-center">
-        <div className="space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Error 404
-          </p>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Página no encontrada
-          </h1>
-          <p className="max-w-md text-sm text-muted-foreground sm:text-base">
-            La ruta que intentas abrir no existe o ya no está disponible. Revisa la URL o vuelve al
-            panel principal.
-          </p>
-        </div>
-        <Button asChild>
-          <Link href="/">Volver al dashboard</Link>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
+      <div className="flex flex-col items-center space-y-6 text-center">
+        <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+          Error 404
+        </p>
+        <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          Página no encontrada
+        </h1>
+        <p className="max-w-sm text-sm text-muted-foreground">
+          La dirección no existe o no está disponible.
+        </p>
+        <Button asChild variant="outline">
+          <Link href="/">Volver al inicio</Link>
         </Button>
       </div>
-    </Layout>
+    </div>
   );
 }
 

@@ -5,6 +5,9 @@ import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
 import { MobileNav } from "./MobileNav";
 import { AppTour } from "./AppTour";
+import { useInactivityLogout } from "@/hooks/useInactivityLogout";
+
+const INACTIVITY_MS = 15 * 60 * 1000; // 15 minutos
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,6 +15,7 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  useInactivityLogout(INACTIVITY_MS);
 
   return (
     <div className="flex min-h-screen bg-background font-sans" role="application" aria-label="Gestión Financiera">
