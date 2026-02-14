@@ -49,7 +49,7 @@ export function withRole<P extends object>(
         router.replace("/");
         return;
       }
-    }, [mounted, isAuthenticated, authPending, rolePending, role, router, redirectTo]);
+    }, [mounted, isAuthenticated, authPending, rolePending, role, router]);
 
     if (!mounted || authPending || rolePending) return spinner;
     if (!isAuthenticated) return null;

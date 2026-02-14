@@ -68,8 +68,11 @@ export default async function handler(
           ? backendRes.headers.getSetCookie()
           : []
       ) as string[];
-      for (const cookie of setCookies) {
-        res.append("Set-Cookie", rewriteSetCookieForFrontend(cookie));
+      if (setCookies.length > 0) {
+        res.setHeader(
+          "Set-Cookie",
+          setCookies.map((c) => rewriteSetCookieForFrontend(c))
+        );
       }
       const location = backendRes.headers.get("Location");
       if (location) res.setHeader("Location", location);
