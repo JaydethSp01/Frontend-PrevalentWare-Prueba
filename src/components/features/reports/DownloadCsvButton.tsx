@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import type { Movement } from "@/core/domain";
+import { toDateOnly } from "@/lib/utils";
 
 interface DownloadCsvButtonProps {
   movements: Movement[];
@@ -19,7 +20,7 @@ export function DownloadCsvButton({
       `"${m.concept.replace(/"/g, '""')}"`,
       m.amount.toFixed(2),
       m.type === "INCOME" ? "INGRESO" : "EGRESO",
-      m.date,
+      toDateOnly(m.date),
       m.userName ?? m.userId,
     ]);
     const csv = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");

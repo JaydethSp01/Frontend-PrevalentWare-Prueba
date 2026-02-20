@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table";
 import { useRole } from "@/hooks/useRole";
 import { movementsRepository, usersRepository } from "@/core/services";
-import { cn } from "@/lib/utils";
+import { cn, formatMovementDate } from "@/lib/utils";
 
 const quickLinks = [
   { href: "/movements", label: "Movimientos", icon: ArrowLeftRight, primary: true },
@@ -120,12 +120,7 @@ function HomePage() {
       maximumFractionDigits: 0,
     }).format(value);
 
-  const formatDate = (dateStr: string) =>
-    new Date(dateStr).toLocaleDateString("es-ES", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
+  const formatDate = formatMovementDate;
 
   const isLoadingSummary = isLoadingMovements || (canAccessUsers && isLoadingUsers);
   const hasErrorSummary = !!errorMovements || (!!errorUsers && canAccessUsers);

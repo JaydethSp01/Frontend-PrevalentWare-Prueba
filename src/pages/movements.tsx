@@ -44,7 +44,7 @@ function MovementsPage() {
     mutationFn: (data: MovementFormValues) =>
       movementsRepository.create({
         ...data,
-        date: new Date(data.date).toISOString(),
+        date: data.date,
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movements"] });
@@ -57,7 +57,7 @@ function MovementsPage() {
     mutationFn: ({ id, data }: { id: string; data: MovementFormValues }) =>
       movementsRepository.update(id, {
         ...data,
-        date: new Date(data.date).toISOString(),
+        date: data.date,
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movements"] });

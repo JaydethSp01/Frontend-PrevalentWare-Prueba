@@ -13,19 +13,12 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import type { Movement } from "@/core/domain";
 import { useRole } from "@/hooks/useRole";
+import { formatMovementDate } from "@/lib/utils";
 
 interface MovementsTableProps {
   movements: Movement[];
   onEdit?: (movement: Movement) => void;
   onDelete?: (movement: Movement) => void;
-}
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("es-ES", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
 }
 
 function formatAmount(amount: number) {
@@ -69,7 +62,7 @@ export function MovementsTable({ movements, onEdit, onDelete }: MovementsTablePr
               </Badge>
             </TableCell>
             <TableCell className="text-muted-foreground">
-              {formatDate(m.date)}
+              {formatMovementDate(m.date)}
             </TableCell>
             <TableCell>{m.userName ?? m.userId}</TableCell>
             {showActions && (

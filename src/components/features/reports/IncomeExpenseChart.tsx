@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { useMemo } from "react";
 import type { Movement } from "@/core/domain";
+import { toDateOnly } from "@/lib/utils";
 
 interface IncomeExpenseChartProps {
   movements: Movement[];
@@ -60,9 +61,9 @@ export function IncomeExpenseChart({ movements }: IncomeExpenseChartProps) {
       { key: string; month: string; ingresos: number; egresos: number }
     > = {};
     movements.forEach((m) => {
-      const date = new Date(m.date);
-      const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
-      const label = date.toLocaleDateString("es-ES", {
+      const [y, mo] = toDateOnly(m.date).split("-").map(Number);
+      const key = `${y}-${String(mo).padStart(2, "0")}`;
+      const label = new Date(y, mo - 1, 1).toLocaleDateString("es-ES", {
         month: "short",
         year: "2-digit",
       });
